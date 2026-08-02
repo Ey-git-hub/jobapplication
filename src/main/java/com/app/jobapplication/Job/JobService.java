@@ -18,4 +18,26 @@ public class JobService {
                 .map(JobResponse::fromEntity)
                 .collect(Collectors.toList());
     }
+
+    // public JobResponse addNewJob(JobRequest request) {
+    //     JobEntity entity = new JobEntity();
+    //     entity.setTitle(request.getTitle());
+    //     entity.setDescription(request.getDescription());
+    //     entity.setMinSalary(request.getMinSalary());
+    //     entity.setMaxSalary(request.getMaxSalary());
+    //     entity.setLocation(request.getLocation());
+
+    //     JobEntity savedEntity = jobRepository.save(entity);
+    //     return JobResponse.fromEntity(savedEntity);
+    // }
+    public JobResponse addNewJob(JobRequest request){
+        JobEntity entity= new JobEntity();
+        entity.setTitle(request.getTitle());
+        entity.setDescription(request.getDescription());
+        entity.setMinSalary(request.getMinSalary());
+        entity.setMaxSalary(request.getMaxSalary());
+        entity.setLocation(request.getLocation());
+        return JobResponse.fromEntity(jobRepository.save(entity));
+
+    }
 }
