@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: jobapplication
+  dataSource:
+    url: postgresql://ep-square-haze-zahv1klg-pooler.c-2.eu-west-2.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+    username: neondb_owner
+    password: npg_nvUmBGk5Y9bT
