@@ -1,0 +1,12 @@
+package com.app.jobapplication.Job;
+
+import lombok.Data;
+
+@Data  
+public class jobRequest {
+    private String title;
+    private String description;
+    private String minSalary;
+    private String maxSalary;
+    private String location;      
+}
