@@ -6,13 +6,12 @@ import lombok.Data;
 public class JobResponse {
     private Long id;
     private String title;
-    private String description; 
+    private String description;
     private String minSalary;
     private String maxSalary;
     private String location;
 
-
-    private static JobResponse fromEntity(jobEntity entity) {
+    public static JobResponse fromEntity(JobEntity entity) {
         JobResponse response = new JobResponse();
         response.setId(entity.getId());
         response.setTitle(entity.getTitle());
