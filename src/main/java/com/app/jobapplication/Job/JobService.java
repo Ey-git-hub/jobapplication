@@ -45,4 +45,9 @@ public class JobService {
         existingJob.setLocation(request.getLocation());
         return JobResponse.fromEntity(jobRepository.save(existingJob));
     }
+
+    public void deleteJob(Long id) {
+        JobEntity existingJob=jobRepository.findById(id).orElseThrow(() -> new IllegalAccessException("job doest not exist by id: "+id));
+        jobRepository.delete(existingJob);
+    }
 }
