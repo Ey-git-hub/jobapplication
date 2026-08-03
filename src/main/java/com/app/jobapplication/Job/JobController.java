@@ -37,4 +37,9 @@ public class JobController {
     public ResponseEntity<JobResponse> updateJob(@PathVariable Long id,@RequestBody JobRequest request) throws IllegalAccessException{
         return ResponseEntity.ok(jobService.updateJob(id,request));
     }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteJob(@PathVariable Long id) {
+        jobService.deleteJob(id);
+        return ResponseEntity.noContent().build();
+    }
 }
