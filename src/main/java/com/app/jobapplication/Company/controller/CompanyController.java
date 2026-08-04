@@ -31,4 +31,8 @@ public class CompanyController {
         return ResponseEntity.notFound().build();
     }
   }
-}
+  @PostMapping("/create")
+  public ResponseEntity<String> createCompany(@RequestBody CompanyRequest companyRequest) {
+    companyServiceImpl.createCompany(companyRequest);
+    return ResponseEntity.ok("Company created successfully.");
+}}
