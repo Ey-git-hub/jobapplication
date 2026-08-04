@@ -9,9 +9,10 @@ import java.util.List;
 import com.app.jobapplication.Company.entity.CompanyEntity;
 import com.app.jobapplication.Company.dto.CompanyRequest;
 import com.app.jobapplication.Company.dto.CompanyResponse;
-import com.app.jobapplication.Job.dto.JobRequest;
-import com.app.jobapplication.Job.entity.JobEntity;
+// import com.app.jobapplication.Job.dto.JobRequest;
+// import com.app.jobapplication.Job.entity.JobEntity;
 import java.util.stream.Collectors;
+import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CompanyServiceImpl implements CompanyService {
@@ -22,31 +23,22 @@ public class CompanyServiceImpl implements CompanyService {
         return companyRepository.findAll().stream().map(CompanyResponse::fromEntity).collect(Collectors.toList());
     }
     @Override
-    public CompanyResponse updateCompany(Long id,CompanyRequest companyRequest) {
-        CompanyEntity existingCompany = companyRepository.findById(id).orElseThrow(() -> new RuntimeException("Company not found with id: " + id));
+    public boolean updateCompany(Long id,CompanyRequest companyRequest) {
+        Optional<CompanyEntity> companyOptional= companyRepository.findById(id);
+        if(companyOptional.isPresent()){
+            CompanyEntity existingCompany = companyOptional.get();
         existingCompany.setName(companyRequest.getName());
         existingCompany.setLocation(companyRequest.getLocation());
         existingCompany.setDescription(companyRequest.getDescription());
+        // existingCompany.setJobs(companyRequest.getJobs());
 
-        if (companyRequest.getJobs() != null) {
-            List<JobEntity> updatedJobs = companyRequest.getJobs().stream()
-                .map(this::mapJobRequestToEntity)
-                .collect(Collectors.toList());
-            existingCompany.setJobs(updatedJobs);
+       companyRepository.save(existingCompany);
+        return true;
         }
-
-        CompanyEntity updatedCompany = companyRepository.save(existingCompany);
-        return CompanyResponse.fromEntity(updatedCompany);
+        return false;
+        
     }
 
-    private JobEntity mapJobRequestToEntity(JobRequest jobRequest) {
-        JobEntity jobEntity = new JobEntity();
-        jobEntity.setTitle(jobRequest.getTitle());
-        jobEntity.setDescription(jobRequest.getDescription());
-        jobEntity.setMinSalary(jobRequest.getMinSalary());
-        jobEntity.setMaxSalary(jobRequest.getMaxSalary());
-        jobEntity.setLocation(jobRequest.getLocation());
-        return jobEntity;
-    }
+    
     
 }
