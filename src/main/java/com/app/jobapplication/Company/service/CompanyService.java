@@ -6,4 +6,5 @@ import com.app.jobapplication.Company.dto.CompanyRequest;
 public interface CompanyService {
     List<CompanyResponse> getAllCompanies();
     boolean updateCompany(Long id, CompanyRequest companyRequest);
+    Void createCompany(CompanyRequest companyRequest);
 }
