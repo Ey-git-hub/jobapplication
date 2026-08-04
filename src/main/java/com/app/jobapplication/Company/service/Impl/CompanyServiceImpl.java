@@ -5,12 +5,15 @@ import com.app.jobapplication.Company.repository.CompanyRepository;
 import lombok.RequiredArgsConstructor;
 import com.app.jobapplication.Company.service.CompanyService;
 import java.util.List;
+
 // import com.app.jobapplication.Company.entity.Company;
 import com.app.jobapplication.Company.entity.CompanyEntity;
 import com.app.jobapplication.Company.dto.CompanyRequest;
 import com.app.jobapplication.Company.dto.CompanyResponse;
 // import com.app.jobapplication.Job.dto.JobRequest;
 // import com.app.jobapplication.Job.entity.JobEntity;
+// import org.springframework.transaction.annotation.Transactional;
+
 import java.util.stream.Collectors;
 import java.util.Optional;
 @Service
@@ -38,7 +41,14 @@ public class CompanyServiceImpl implements CompanyService {
         return false;
         
     }
+    @Override
+    public Void createCompany(CompanyRequest companyRequest) {
+        CompanyEntity companyEntity = new CompanyEntity();
+                companyEntity.setName(companyRequest.getName());
+                companyEntity.setLocation(companyRequest.getLocation());
+                companyEntity.setDescription(companyRequest.getDescription());
+        companyRepository.save(companyEntity);
+        return null;
+    }
 
-    
-    
 }
