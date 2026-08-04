@@ -2,7 +2,6 @@ package com.app.jobapplication.Company.entity;
 
 import java.util.List;
 
-import com.app.jobapplication.Job.dto.JobRequest;
 import com.app.jobapplication.Job.entity.JobEntity;
 
 import jakarta.persistence.Entity;

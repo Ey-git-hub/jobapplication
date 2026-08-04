@@ -10,6 +10,7 @@ import com.app.jobapplication.Company.service.Impl.CompanyServiceImpl;
 import com.app.jobapplication.Company.dto.CompanyResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
 
 @RestController
@@ -21,7 +22,7 @@ public class CompanyController {
   public ResponseEntity<List<CompanyResponse>> getAllComapnies() {
     return ResponseEntity.ok(companyServiceImpl.getAllCompanies());
   }
-  @PostMapping("/update/{id}")
+  @PutMapping("/update/{id}")
   public ResponseEntity<String> updateCompany(@PathVariable Long id, @RequestBody CompanyRequest companyRequest) {
     boolean isUpdated = companyServiceImpl.updateCompany(id, companyRequest);
     if (isUpdated) {
