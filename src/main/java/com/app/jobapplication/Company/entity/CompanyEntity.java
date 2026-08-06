@@ -9,11 +9,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+// import lombok.AllArgsConstructor;
+import lombok.*;
+// import lombok.NoArgsConstructor;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,7 +24,7 @@ public class CompanyEntity {
     private Long id;
     private String name;
     private String location;
-    @OneToMany
+    @OneToMany(mappedBy = "company")
     private List<JobEntity> jobs;
     private String description;
 }

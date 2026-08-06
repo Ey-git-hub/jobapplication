@@ -1,13 +1,14 @@
 package com.app.jobapplication.Job.entity;
 
+import com.app.jobapplication.Company.entity.CompanyEntity;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.ManyToOne;
+// import jakarta.persistence.OneToMany;    
+import lombok.*;
 @Getter
 @Setter
 @Entity
@@ -22,4 +23,6 @@ public class JobEntity {
     private String minSalary;
     private String maxSalary;
     private String location;
+    @ManyToOne
+    private CompanyEntity company;
 }
