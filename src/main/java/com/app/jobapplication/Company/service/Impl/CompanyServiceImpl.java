@@ -51,6 +51,10 @@ public class CompanyServiceImpl implements CompanyService {
         return null;
     }
     @Override
+    public CompanyResponse getCompanyById(Long id) {
+        return companyRepository.findById(id).map(CompanyResponse::fromEntity).orElse(null);
+    }
+    @Override
     public boolean deleteCompany(Long id) {
         if(companyRepository.existsById(id))
         {
