@@ -1,4 +1,5 @@
 package com.app.jobapplication.Company.controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,4 +36,14 @@ public class CompanyController {
   public ResponseEntity<String> createCompany(@RequestBody CompanyRequest companyRequest) {
     companyServiceImpl.createCompany(companyRequest);
     return ResponseEntity.ok("Company created successfully.");
-}}
+}
+@DeleteMapping("/delete/{id}")
+public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
+    boolean isDeleted = companyServiceImpl.deleteCompany(id);
+    if (isDeleted) {
+        return ResponseEntity.noContent().build();
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+}
