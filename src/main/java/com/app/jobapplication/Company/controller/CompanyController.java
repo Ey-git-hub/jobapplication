@@ -46,4 +46,12 @@ public ResponseEntity<Void> deleteCompany(@PathVariable Long id) {
         return ResponseEntity.notFound().build();
     }
 }
-}
+@GetMapping("/{id}")
+public ResponseEntity<CompanyResponse> getCompanyById(@PathVariable Long id) {
+    CompanyResponse companyResponse = companyServiceImpl.getCompanyById(id);
+    if (companyResponse != null) {
+        return ResponseEntity.ok(companyResponse);
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}}
