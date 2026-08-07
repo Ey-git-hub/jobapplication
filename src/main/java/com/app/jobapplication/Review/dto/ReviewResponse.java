@@ -1,8 +1,9 @@
 package com.app.jobapplication.Review.dto;
 import com.app.jobapplication.Review.entity.ReviewEntity;
-import lombok.Data;
+import lombok.*;
 
 @Data
+@NoArgsConstructor
 public class ReviewResponse {
     private Long id;
     private String reviewerName;
