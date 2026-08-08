@@ -7,6 +7,6 @@ public interface ReviewService {
      List<ReviewResponse> getAllReviews(Long companyId);
      boolean updateReview(Long reviewId,Long companyId,ReviewRequest reviewRequest);
      boolean createReview(ReviewRequest reviewRequest,Long id);
-     // boolean deleteReview(Long id);
+     boolean deleteReview(Long companyId,Long reviewId);
      ReviewResponse getReviewById(Long companyId,Long reviewId);
 }
