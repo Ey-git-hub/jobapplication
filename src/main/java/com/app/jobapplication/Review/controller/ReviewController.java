@@ -13,6 +13,7 @@ import com.app.jobapplication.Review.service.Impl.ReviewServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -46,5 +47,14 @@ public class ReviewController {
       }
     return ResponseEntity.notFound().build();
 }
+   @PutMapping("/reviews/{reviewId}")
+   public ResponseEntity<String> updateReview(@PathVariable Long companyId,
+    @PathVariable Long reviewId,@RequestBody ReviewRequest reviewRequest){
+        boolean isUpdated=reviewService.updateReview(companyId,reviewId,reviewRequest);
+        if(isUpdated){
+            return ResponseEntity.ok("review updated Successfully");
+        }
+        return ResponseEntity.notFound().build();
+    }
     
 }
