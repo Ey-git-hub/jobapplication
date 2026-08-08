@@ -1,6 +1,7 @@
 package com.app.jobapplication.Review.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,5 +57,13 @@ public class ReviewController {
         }
         return ResponseEntity.notFound().build();
     }
+   @DeleteMapping("/reviews/{reviewId}")
+    public ResponseEntity<String> deleteReview(@PathVariable Long companyId,@PathVariable Long reviewId){
+boolean isDeleted=reviewService.deleteReview(companyId,reviewId);
+        if(isDeleted){
+            return ResponseEntity.ok("review deleted Successfully");
+        }
+        return ResponseEntity.notFound().build();
     
+}
 }
