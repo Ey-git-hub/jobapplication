@@ -6,24 +6,18 @@ import lombok.*;
 @NoArgsConstructor
 public class ReviewResponse {
     private Long id;
-    private String reviewerName;
-    private String reviewText;
-    private int rating;
-    private String jobName;
-    private String companyName;
-    private String reviewerEmail;
-    private String reviewerPhone;
+    private String title;
+    private String description;
+    private double rating;
+   
 
     public static ReviewResponse fromEntity(ReviewEntity reviewEntity) {
         ReviewResponse response = new ReviewResponse();
         response.setId(reviewEntity.getId());
-        response.setReviewerName(reviewEntity.getReviewerName());
-        response.setReviewText(reviewEntity.getReviewText());
+        response.setTitle(reviewEntity.getTitle());
+        response.setDescription(reviewEntity.getDescription());
         response.setRating(reviewEntity.getRating());
-        response.setJobName(reviewEntity.getJobName());
-        response.setCompanyName(reviewEntity.getCompanyName());
-        response.setReviewerEmail(reviewEntity.getReviewerEmail());
-        response.setReviewerPhone(reviewEntity.getReviewerPhone());
+      
         return response;
     }
 }
