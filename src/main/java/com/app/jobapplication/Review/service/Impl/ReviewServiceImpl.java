@@ -39,4 +39,12 @@ public boolean createReview(ReviewRequest reviewRequest, Long id) {
    return false;
    
 }
+
+public ReviewResponse getReviewById(Long companyId,Long reviewId){
+   List<ReviewResponse> reviews =getAllReviews(companyId);
+           return reviews.stream().filter(review-> review.getId().equals(reviewId))
+           .findFirst()
+           .orElse(null);
+
+}
 }
