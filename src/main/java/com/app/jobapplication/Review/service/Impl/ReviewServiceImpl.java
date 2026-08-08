@@ -2,12 +2,13 @@ package com.app.jobapplication.Review.service.Impl;
 
 import java.util.List;
 // import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.app.jobapplication.Company.dto.CompanyResponse;
 import com.app.jobapplication.Company.entity.CompanyEntity;
-import com.app.jobapplication.Company.service.CompanyService;
+import com.app.jobapplication.Company.service.Impl.CompanyServiceImpl;
 import com.app.jobapplication.Review.dto.ReviewRequest;
 import com.app.jobapplication.Review.dto.ReviewResponse;
 import com.app.jobapplication.Review.entity.ReviewEntity;
@@ -20,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
    private final ReviewRepository reviewRepository;
-   private final CompanyService companyService;
+   private final CompanyServiceImpl companyService;
  @Override
  public List<ReviewResponse> getAllReviews(Long companyId){
   return reviewRepository.findByCompanyEntityId(companyId);
@@ -47,4 +48,23 @@ public ReviewResponse getReviewById(Long companyId,Long reviewId){
            .orElse(null);
 
 }
+@Override
+public boolean updateReview(Long reviewId,Long companyId,ReviewRequest reviewRequest) {
+   Optional<ReviewEntity> reviewOptional=reviewRepository.findById(reviewId);
+   if(companyService.getCompanyById(companyId) != null){
+       if (reviewOptional.isPresent()) {
+          ReviewEntity review = reviewOptional.get();
+          // ensure the review belongs to the given company
+          if (review.getCompany() != null && review.getCompany().getId() != null
+                && review.getCompany().getId().equals(companyId)) {
+             review.setTitle(reviewRequest.getTitle());
+             review.setDescription(reviewRequest.getDescription());
+             review.setRating(reviewRequest.getRating());
+             reviewRepository.save(review);
+             return true;
+          }
+       }
+    }
+    return false;
+ }
 }
