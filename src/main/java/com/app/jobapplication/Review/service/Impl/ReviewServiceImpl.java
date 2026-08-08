@@ -67,4 +67,20 @@ public boolean updateReview(Long reviewId,Long companyId,ReviewRequest reviewReq
     }
     return false;
  }
-}
+@Override
+public boolean deleteReview(Long companyId, Long reviewId) {
+    // ensure company exists
+    if (companyService.getCompanyById(companyId) == null) {
+       return false;
+    }
+    Optional<ReviewEntity> reviewOptional = reviewRepository.findById(reviewId);
+    if (reviewOptional.isPresent()) {
+       ReviewEntity review = reviewOptional.get();
+       if (review.getCompany() != null && review.getCompany().getId() != null
+             && review.getCompany().getId().equals(companyId)) {
+          reviewRepository.delete(review);
+          return true;
+       }
+    }
+    return false;
+}}
