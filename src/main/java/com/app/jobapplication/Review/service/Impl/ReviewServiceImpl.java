@@ -24,7 +24,7 @@ public class ReviewServiceImpl implements ReviewService {
    private final CompanyServiceImpl companyService;
  @Override
  public List<ReviewResponse> getAllReviews(Long companyId){
-  return reviewRepository.findByCompanyEntityId(companyId);
+  return reviewRepository.findByCompanyId(companyId);
  }
 @Override
 public boolean createReview(ReviewRequest reviewRequest, Long id) {
